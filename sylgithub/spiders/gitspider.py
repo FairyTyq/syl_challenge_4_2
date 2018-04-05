@@ -13,7 +13,7 @@ class GitspiderSpider(scrapy.Spider):
         for info in response.css('div#user-repositories-list li'):
             yield ({
                 
-                'name':info.xpath('.//a[contains(@itemprop,"name codeRepository")]/text()').extract_first(),
+                'name':info.xpath('.//a[contains(@itemprop,"name codeRepository")]/text()').re_first('([\w-]+)'),
 
                 'update_time':info.css('relative-time::attr(datetime)').extract_first()
             })
