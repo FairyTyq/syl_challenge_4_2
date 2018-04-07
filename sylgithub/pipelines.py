@@ -14,6 +14,12 @@ class SylgithubPipeline(object):
         item['name'] = item['name']
 
         item['update_time'] = datetime.strptime(item['update_time'],'%Y-%m-%dT%H:%M:%SZ')
+        
+        item['commits'] = int(item['commits'].replace(',',''))
+
+        item['branches'] = int(item['branches'].replace(',',''))
+
+        item['releases'] = int(item['branches'])
 
         self.session.add(Repository(**item))
         return item
